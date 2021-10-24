@@ -1,15 +1,28 @@
 
-function climbingLeaderboard(ranked, player) {
-    let ranks = [];
-    player.forEach(function (ele) {
-        let rank = (ele < ranked[0] ? 2 : 1);
-        for (let i = 1; i < ranked.length; i++) {
-            if (ranked[i-1] != ranked[i] && 
-                ele < ranked[i]) {
-                rank += 1;
-            }
+function improved(array, target) {
+    let rank = 1;
+    for (let i = 0; i < array.length; i++) {
+        if (target >= array[i]) {
+            break;
+        } else {
+            rank += 1;
         }
-        ranks.push(rank);
-    })
-    return ranks;
+    }
+    return rank;
+}
+
+
+function climbingLeaderboard(ranked, player) {
+
+    let newRank = [];
+    newRank.push(ranked[0]);
+    for (let i = 1; i < ranked.length; i++) {
+        if (ranked[i] !== ranked[i-1]) {
+            newRank.push(ranked[i]);
+        }
+    }
+
+    return player.map(function (ele) {
+        return improved(newRank,ele);
+    });
 }
