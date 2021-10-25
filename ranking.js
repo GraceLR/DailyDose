@@ -1,14 +1,39 @@
 
-function improved(array, target) {
-    let rank = 1;
-    for (let i = 0; i < array.length; i++) {
-        if (target >= array[i]) {
-            break;
-        } else {
-            rank += 1;
+
+function binary(array, target) {
+
+    let left = 0;
+    let right = array.length - 1;
+
+    if (array.length === 0) {
+        return 1;
+    } else {
+
+        while (!(left === right - 1)) {
+
+            let midpoint = ((right + left) % 2 === 0 ? 
+            (right + left)/2 : (right + left + 1)/2);
+            
+            if (array[midpoint] > target) {
+                left = midpoint;
+            } else if (array[midpoint] < target) {
+                right = midpoint;
+            } else if (array[midpoint] === target) {
+                return midpoint + 1;
+            }
         }
+
+        if (target >= array[left]) {
+            return left + 1;
+        } else if (target < array[right]) {
+            return right + 2;
+        } else if (target === array[right]) {
+            return right + 1;
+        } else if (target > array[right] && target < array[left]) {
+            return left + 2;
+        }
+
     }
-    return rank;
 }
 
 
@@ -23,6 +48,6 @@ function climbingLeaderboard(ranked, player) {
     }
 
     return player.map(function (ele) {
-        return improved(newRank,ele);
+        return binary(newRank,ele);
     });
 }
