@@ -1,28 +1,35 @@
 
 
+
+
 const noPrefix = (words) => {
 
   let trie = {};
+  let res = 'not found';
 
-  for (let i = 0; i < words.length; i++) {
-      
+  words.forEach((word) => {
+
     let pointer = trie;
 
-    for (let j = 0; j < words[i].length; j++) {
-            
-      if (pointer.end === 1) {
-        return 'found';
-      } else if (pointer[words[i][j]] === undefined) {
-        pointer[words[i][j]] = {};
-      }
-            
-      pointer = pointer[words[i][j]];
+    word.split("").forEach((char) => {
 
-    }
+        if (pointer.end === 1) {
+            res = 'found';
+            return;
+            
+          } else if (pointer[char] === undefined) {
+            pointer[char] = {};
+          }
+                
+          pointer = pointer[char];
+    });
+
     pointer.end = 1;
-  }
 
-  return 'not found';
+  });
+
+  return res;
+  
 };
 
 
