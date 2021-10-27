@@ -5,30 +5,37 @@
 const noPrefix = (words) => {
 
   let trie = {};
-  let res = 'not found';
 
-  words.forEach((word) => {
+  const prefixWord = words.find((word) => {
 
     let pointer = trie;
 
-    word.split("").forEach((char) => {
+    const isFound = word.split("").find((char) => {
+
+        let nextPointer = pointer[char];
 
         if (pointer.end === 1) {
-            res = 'found';
-            return;
-            
-          } else if (pointer[char] === undefined) {
-            pointer[char] = {};
-          }
+            return true;    
+        }
+        
+        if (nextPointer === undefined) {
+            nextPointer = {};
+        }
                 
-          pointer = pointer[char];
+        pointer = nextPointer;
+
+        return false;
     });
+
+    if (isFound) {
+        return true;
+    }
 
     pointer.end = 1;
 
   });
 
-  return res;
+  return prefixWord === undefined ? 'good' : 'bad';
   
 };
 
