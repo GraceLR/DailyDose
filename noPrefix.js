@@ -12,23 +12,23 @@ const noPrefix = (words) => {
 
     const isFound = word.split("").find((char) => {
 
-        let nextPointer = pointer[char];
+      let nextPointer = pointer[char];
 
-        if (pointer.end === 1) {
-            return true;    
-        }
+      if (pointer.end === 1) {
+        return true;
+      }
         
-        if (nextPointer === undefined) {
-            nextPointer = {};
-        }
+      if (nextPointer === undefined) {
+        nextPointer = {};
+      }
                 
-        pointer = nextPointer;
+      pointer = nextPointer;
 
-        return false;
+      return false;
     });
 
     if (isFound) {
-        return true;
+      return true;
     }
 
     pointer.end = 1;

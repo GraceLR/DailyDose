@@ -19,20 +19,20 @@ const { testInput, realInput } = require("./input");
 // console.log(location(realInput));
 
 const locationPart2 = (input) => {
-    let horizontal = 0;
-    let depth = 0;
-    let aim = 0;
-    input.forEach(move => {
-        if(move[0] === 'f') {
-            horizontal += Number(move[8]);
-            depth += Number(move[8]) * aim;
-        } else if(move[0] === 'u') {
-            aim -= Number(move[3]);
-        } else if(move[0] === 'd') {
-            aim += Number(move[5]);
-        }
-    })
-    return horizontal * depth;
-}
+  let horizontal = 0;
+  let depth = 0;
+  let aim = 0;
+  input.forEach(move => {
+    if (move[0] === 'f') {
+      horizontal += Number(move[8]);
+      depth += Number(move[8]) * aim;
+    } else if (move[0] === 'u') {
+      aim -= Number(move[3]);
+    } else if (move[0] === 'd') {
+      aim += Number(move[5]);
+    }
+  });
+  return horizontal * depth;
+};
 console.log(locationPart2(testInput));
 console.log(locationPart2(realInput));

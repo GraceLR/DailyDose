@@ -14,14 +14,14 @@ const { testInput, realInput } = require("./input");
 // console.log(countIncrease(realInput));
 
 const partTwo = (input) => {
-    let count = 0;
-    for(let i = 3; i < input.length; i++) {
-        if(input[i] > input[i - 3]) {
-            count += 1;
-        }
+  let count = 0;
+  for (let i = 3; i < input.length; i++) {
+    if (input[i] > input[i - 3]) {
+      count += 1;
     }
-    return count;
-}
+  }
+  return count;
+};
 
 console.log(partTwo(testInput));
 console.log(partTwo(realInput));
