@@ -1,4 +1,3 @@
-
 const testInput = [
     '00100',
     '11110',

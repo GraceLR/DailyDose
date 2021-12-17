@@ -1,4 +1,3 @@
-
 const { testInput, realInput } = require("./input");
 
 // const powerConsumption = (input) => {

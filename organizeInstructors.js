@@ -1,19 +1,19 @@
 
 
 const organizeInstructors = function(instructors) {
-    let result = {};
+  let result = {};
 
-while (instructors.length > 0) {
+  while (instructors.length > 0) {
     let tracker = [];
     result[instructors[0].course] = [];
     for (var i = 0; i < instructors.length; i++) {
-        if(instructors[i].course === instructors[0].course) {
-            result[instructors[0].course].push(instructors[i].name);
-            tracker.push(i);
-        }
+      if (instructors[i].course === instructors[0].course) {
+        result[instructors[0].course].push(instructors[i].name);
+        tracker.push(i);
+      }
     }
-    for (var i = tracker.length-1; i >= 0; i--){
-        instructors.splice(tracker[i],1);
+    for (var i = tracker.length - 1; i >= 0; i--) {
+      instructors.splice(tracker[i],1);
     }
   }
   return result;
@@ -33,15 +33,15 @@ while (instructors.length > 0) {
 //     return result;
 // }
   
-  console.log(organizeInstructors([
-    {name: "Samuel", course: "iOS"},
-    {name: "Victoria", course: "Web"},
-    {name: "Karim", course: "Web"},
-    {name: "Donald", course: "Web"}
-  ]));
-  console.log(organizeInstructors([
-    {name: "Brendan", course: "Blockchain"},
-    {name: "David", course: "Web"},
-    {name: "Martha", course: "iOS"},
-    {name: "Carlos", course: "Web"}
-  ]));
+console.log(organizeInstructors([
+  {name: "Samuel", course: "iOS"},
+  {name: "Victoria", course: "Web"},
+  {name: "Karim", course: "Web"},
+  {name: "Donald", course: "Web"}
+]));
+console.log(organizeInstructors([
+  {name: "Brendan", course: "Blockchain"},
+  {name: "David", course: "Web"},
+  {name: "Martha", course: "iOS"},
+  {name: "Carlos", course: "Web"}
+]));

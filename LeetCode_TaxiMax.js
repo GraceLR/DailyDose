@@ -1,56 +1,52 @@
 
-const cost = [];
+// const cost = [];
 
 
-const findBestPath = (qwe, n, nextNode, totalCost) => {
-
-    if (nextNode === n) {
-        cost.push(totalCost);
-        return;
-    }
-
-    const node = qwe[nextNode]
-    const keys = Object.keys(node);
-
-    for (let i = 0; i < keys.length; i++) {
-        const xyz = Number(keys[i]);
-        const value = node[xyz]; 
-        const costLayer = totalCost + value;
-
-        findBestPath(qwe, n, xyz, costLayer);
-    }
-
-}
-
-
-// const findBestPath = (arr, n, nextNode) => {
-//     // base
-//     // when we hit the last node
+// const findBestPath = (qwe, n, nextNode, totalCost) => {
 
 //     if (nextNode === n) {
-//         return 0;
+//         cost.push(totalCost);
+//         return;
 //     }
 
-//     // recurse
-//     // recurse on every edge, then return the max path length
-
-//     const node = arr[nextNode]
+//     const node = qwe[nextNode]
 //     const keys = Object.keys(node);
-
-//     let ret = 0;
 
 //     for (let i = 0; i < keys.length; i++) {
 //         const xyz = Number(keys[i]);
-//         const value = node[xyz];
-//          
+//         const value = node[xyz]; 
+//         const costLayer = totalCost + value;
 
-//         ret = Math.max(ret, findBestPath(arr, n, xyz) + value);
+//         findBestPath(qwe, n, xyz, costLayer);
 //     }
 
-//     /* ??? */
-
-//     return ret;
 // }
+
+
+const findBestPath = (arr, n, nextNode) => {
+    // base
+    // when we hit the last node
+
+    if (nextNode === n) {
+        return 0;
+    }
+
+
+    const node = arr[nextNode]
+    const keys = Object.keys(node);
+
+    let ret = 0;
+
+    for (let i = 0; i < keys.length; i++) {
+        const xyz = Number(keys[i]);
+        const value = node[xyz];
+         
+
+        ret = Math.max(ret, findBestPath(arr, n, xyz) + value);
+    }
+
+    return ret;
+}
 
 
 var maxTaxiEarnings = function(n, rides) {
