@@ -1,4 +1,5 @@
 
+
 const { test, real } = require("./input");
 
 const compare = (num1, num2) => {
