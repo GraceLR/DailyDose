@@ -2,23 +2,23 @@
 const { testList, realList, Day } = require("./input");
 
 const day6Part1 = (list, day) => {
-  const res = [list];
+  let pre = list;
   for(let i = 1; i <= day; i++) {
-    const newOne = [];
     let nextDay = [];
-    res[i - 1].forEach(ele => {
+    pre.forEach(ele => {
       if(ele === 0) {
         nextDay.push(6);
-        newOne.push(8);
+        nextDay.push(8);
       } else {
         nextDay.push(ele - 1);
       }
     });
-    nextDay = nextDay.concat(newOne);
-    res.push(nextDay);
+    pre = nextDay;
   }
-  return res[day].length;
+  return pre.length;
 };
 
 console.log(day6Part1(testList, Day));
-console.log(day6Part1(realList, Day));
+// console.log(day6Part1(realList, Day));
+
+
