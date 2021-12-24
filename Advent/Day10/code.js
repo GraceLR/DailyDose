@@ -7,7 +7,7 @@ const day10Part1 = input => {
   loop1:
   for(let i = 0; i < input.length; i++) {
     loop2:
-    for(let j = 0; j < input[0].length; j++) {
+    for(let j = 0; j < input[i].length; j++) {
       if(input[i][j] === '(' || input[i][j] === '[' ||
       input[i][j] === '{' || input[i][j] === '<') {
         trace[i][j] = 'o';
