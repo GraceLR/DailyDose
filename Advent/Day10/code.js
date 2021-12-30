@@ -1,8 +1,14 @@
 
 const { test, real } = require("./input");
 
+const middleScore = arr => {
+  const sortedScore = arr.sort((a, b) => a - b);
+  return sortedScore[(sortedScore.length - 1)/2];
+}
+
 const day10Part1 = input => {
   let points = 0;
+  let pointsP2 = [];
   const trace = input.map(_str => []);
   loop1:
   for(let i = 0; i < input.length; i++) {
@@ -80,9 +86,26 @@ const day10Part1 = input => {
           }
         }
       }
+      if(j === input[i].length - 1) {
+        let pointPush = 0;
+        for(let k = trace[i].length - 1; k >= 0; k--) {
+          if(trace[i][k] === 'o') {
+            if(input[i][k] === '(') {
+              pointPush = (pointPush * 5) + 1;
+            } else if(input[i][k] === '[') {
+              pointPush = (pointPush * 5) + 2;
+            } else if(input[i][k] === '{') {
+              pointPush = (pointPush * 5) + 3;
+            } else if(input[i][k] === '<') {
+              pointPush = (pointPush * 5) + 4;
+            }
+          }
+        }
+        pointsP2.push(pointPush);
+      }
     }
   }
-  return points;
+  return middleScore(pointsP2);
 };
 
 console.log(day10Part1(test));
