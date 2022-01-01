@@ -13,7 +13,7 @@ const nine = input => {
   }
   return ct;
 };
-// console.log(nine([[1,1],[2,2],[3,10],[10,11]]))
+
 
 const rec = (input, i, j) => {
 
@@ -53,18 +53,20 @@ const rec = (input, i, j) => {
   }
 };
 
-const day11Part1 = (mat, time) => {
+const day11Part2 = (mat) => {
   let count = 0;
+  let time = 0;
   const matArr = mat.map(str => str.split(''));
-  for(let r = 1; r <= time; r++) {
+  while(count !== mat.length * mat[0].length) {
     matArr.forEach((_arr, i) => matArr.forEach((_ele, j) => {
       rec(matArr, i, j);
     }));
-    count += nine(matArr);
+    count = nine(matArr);
+    time += 1;
   }
-  return count;
+  return time;
 };
 
-console.log(day11Part1(test, 100));
-console.log(day11Part1(real, 100));
+console.log(day11Part2(test, 100));
+console.log(day11Part2(real, 100));
 
