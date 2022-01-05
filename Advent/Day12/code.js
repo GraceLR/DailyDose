@@ -47,15 +47,26 @@ const { test, real } = require("./input");
 //   console.log(z);
 // };
 
+const temp = input => {
+  const steps = Object.keys(input);
+  for(let i = 0; i < steps.length; i++) {
+    if(input[steps[i]]['count'] === 2) {
+      return true;
+    }
+  }
+  return false;
+};
+
 
 const rec = (objMap, step) => {
 
-  if(objMap[step]['count'] === 1) {
-    if(step === 'end') {
-      return 1;
-    } else {
-      return 0;
-    }
+  if(step === 'end') {
+    console.log(step, '-----------')
+    return 1;
+  } else if(
+    objMap[step]['count'] === 2 || 
+    (objMap[step]['count'] === 1 && (step === 'start' || temp(objMap)))) {
+    return 0;
   }
 
   objMap[step]['count'] += 1;
@@ -69,7 +80,9 @@ const rec = (objMap, step) => {
   });
 
   if(step[0] === step[0].toLowerCase()) {
-    objMap[step]['count'] = 0;
+    objMap[step]['count'] -= 1;
+  } else {
+    objMap[step]['count'] = 'unlimited';
   }
 
   return roadNum;
@@ -100,7 +113,6 @@ const day12Part1 = input => {
       }
     }
   });
-  objMap['end']['count'] = 1;
 
   return rec(objMap, 'start');
 
