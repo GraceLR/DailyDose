@@ -25,8 +25,8 @@ const test =
 
     fold: 
     {
-        axis: 'y',
-        num: 7
+        axis: ['y', 'x'],
+        num: [7, 5]
     }
 
 }
@@ -907,11 +907,10 @@ const real =
 
     fold: 
     {
-        axis: 'x',
-        num: 655
+        axis: ['x', 'y', 'x', 'y', 'x', 'y', 'x', 'y', 'x', 'y', 'y', 'y'],
+        num: [655, 447, 327, 223, 163, 111, 81, 55, 40, 27, 13, 6]
     }
 }
-
 
 
 module.exports = { test, real };
