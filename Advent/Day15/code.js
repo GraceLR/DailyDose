@@ -16,7 +16,7 @@ const rec = (input) => {
       costMap[nextY][nextX] = nextCost;
       queue.push({ x: nextX, y: nextY });
     }
-  }
+  };
 
   while (queue.length > 0) {
     const { x, y } = queue.pop();
