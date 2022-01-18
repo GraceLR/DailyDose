@@ -21,8 +21,10 @@ const base1 = [test.length - 2, test[0].length - 1];
 const base2 = [test.length - 1, test[0].length - 2];
 const base3 = [test.length - 2, test[0].length - 2];
 
-const rec = (input, step, seen) => {
+let counter = 0;
 
+const rec = (input, step, seen) => {
+  counter++;
   const i = step[0];
   const j = step[1];
 
@@ -84,3 +86,4 @@ const rec = (input, step, seen) => {
 };
 
 console.log(rec(test, [0, 0], seen(test)));
+console.log(counter);
