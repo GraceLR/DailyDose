@@ -1,6 +1,41 @@
 
 const { test, real , test2} = require("./input");
 
+const extendedInput = input => {
+
+  const rt = input.map(row => {
+    let numAdd = 1;
+    let rowCopy = row;
+    while(numAdd <= 4) {
+      let newRow = '';
+      for(let i = 0; i < rowCopy.length; i++) {
+        newRow += (Number(rowCopy[i]) + numAdd > 9 ? 
+        Number(rowCopy[i]) + numAdd - 9 : Number(rowCopy[i]) + numAdd);
+      }
+      row += newRow;
+      numAdd += 1;
+    }
+    return row;
+  });
+
+  const horiCopy = rt.map(row => row); // array is not primitive
+  let numAdd = 1;
+  while(numAdd <= 4) {
+    horiCopy.forEach(row => {
+      let rowNew = '';
+      row.split('').forEach(char => {
+        rowNew += (Number(char) + numAdd > 9 ? 
+        Number(char) + numAdd - 9 : Number(char) + numAdd);
+      });
+      rt.push(rowNew);
+    });
+    numAdd += 1;
+  }
+
+  return rt;
+
+};
+
 // takes number of input[i][j] into paths choosing. Costly paths were not steped on.
 
 const rec = (input) => {
@@ -33,4 +68,4 @@ const rec = (input) => {
 
 };
 
-console.log(rec(real));
+console.log(rec(extendedInput(real)));
