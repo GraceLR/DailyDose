@@ -32,6 +32,9 @@ const nodeDown = (input, pos, num) => {
 };
 
 const nodeUp = (input, pos, num) => {
+  if(input.parent === undefined) {
+    return;
+  }
   if(input['parent'][pos] !== input) {
     if(typeof input['parent'][pos] === 'number') {
       input['parent'][pos] += num;
@@ -40,9 +43,6 @@ const nodeUp = (input, pos, num) => {
     nodeDown(input['parent'][pos], pos, num);
     return;
   } else {
-    if(input.parent === undefined) {
-      return;
-    }
     nodeUp(input.parent, pos, num);
   }
   return;
@@ -67,7 +67,8 @@ const recOneRound = (input, level) => {
 
   for(let i = 0; i <= 1; i++) {
     if(input[i] >= 10) {
-      input[i] = { 0: Math.floor(input[i]/2), 1: Math.ceil(input[i]/2) };
+      input[i] = { 0: Math.floor(input[i]/2), 1: Math.ceil(input[i]/2), 
+      parent: input };
       return true;
     } 
     if(typeof input[i] === 'object') {
@@ -77,12 +78,21 @@ const recOneRound = (input, level) => {
       }
     }
   }
-  return;
+  return false;
 }
   
+const tillNoEorS = input => {
+  let res = true;
+  while(res) {
+    res = recOneRound(input, 0);
+  }
+  return input;
+};
 
+// // const initialObj = objRec([input[0], input[1]]);
+// // const nextObj = { 0: recOneRound(initialObj, 0), 1: objRec(input[i])};
 const test = [[[[11,[10,1]], 11], 2],3];
-rec(objRec(test), 0)
+tillNoEorS(objRec(test))
 
 // stack
 // const recWithoutRecursion = input => {
