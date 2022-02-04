@@ -1,5 +1,5 @@
 
-// const { test, real } = require("./input");
+const { test, real } = require("./input");
 
 const objRec = input => {
 
@@ -48,17 +48,35 @@ const nodeUp = (input, pos, num) => {
   return;
 };
 
+const split = input => {
+  for(let i = 0; i <= 1; i++) {
+    if(typeof input[i] === 'number' && input[i] >= 10) {
+      input[i] = { 0: Math.floor(input[i]/2), 1: Math.ceil(input[i]/2), 
+      parent: input };
+      return true;
+    }
+    if(typeof input[i] === 'object') {
+      const terminate = split(input[i]);
+      if(terminate) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
 
-const recOneRound = (input, level) => {
+const explosion = (input, level) => {
 
   if(typeof input[0] === 'number' && typeof input[1] === 'number' &&
   level >= 4) {
 
     nodeUp(input, 0, input[0]);
     nodeUp(input, 1, input[1]);
+
     for(let i = 0; i <= 1; i++) {
       if(input['parent'][i] === input) {
         input['parent'][i] = 0;
+        break;
       }
     }
 
@@ -66,13 +84,8 @@ const recOneRound = (input, level) => {
   }
 
   for(let i = 0; i <= 1; i++) {
-    if(input[i] >= 10) {
-      input[i] = { 0: Math.floor(input[i]/2), 1: Math.ceil(input[i]/2), 
-      parent: input };
-      return true;
-    } 
     if(typeof input[i] === 'object') {
-      const terminate = recOneRound(input[i], level + 1);
+      const terminate = explosion(input[i], level + 1);
       if(terminate) {
         return true;
       }
@@ -81,18 +94,35 @@ const recOneRound = (input, level) => {
   return false;
 }
   
-const tillNoEorS = input => {
+const tillNoEorS = obj => {
   let res = true;
   while(res) {
-    res = recOneRound(input, 0);
+    res = explosion(obj, 0) || split(obj);
   }
-  return input;
+  return obj;
 };
 
-// // const initialObj = objRec([input[0], input[1]]);
-// // const nextObj = { 0: recOneRound(initialObj, 0), 1: objRec(input[i])};
-const test = [[[[11,[10,1]], 11], 2],3];
-tillNoEorS(objRec(test))
+// console.log(tillNoEorS(objRec([[[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]],
+//   [7,[[[3,7],[4,3]],[[6,3],[8,8]]]]])))
+
+const day18Part1 = input => {
+
+  const arr0 = [input[0], input[1]];
+  const obj0 = objRec(arr0);
+  let nextObj = tillNoEorS(obj0);
+
+  for(let i = 2; i < input.length; i++) {
+    let pos1 = objRec(input[i]);
+    nextObj = { 0: nextObj, 1: pos1 };
+    for(let j = 0; j <= 1; j++) {
+      nextObj[j]['parent'] = nextObj;
+    }
+    tillNoEorS(nextObj);
+  }
+  return nextObj;
+};
+
+day18Part1(test);
 
 // stack
 // const recWithoutRecursion = input => {
@@ -118,10 +148,3 @@ tillNoEorS(objRec(test))
 //   return parentObj;
 // }
 
-// const day18part1 = input => {
-
-  
-// };
-
-
-// console.log(day17part2(253,280,46,73));
