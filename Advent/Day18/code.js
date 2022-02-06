@@ -172,3 +172,26 @@ console.log(day18Part1(addition(real)));
 //   return parentObj;
 // }
 
+const exclude = (input, ind) => {
+  let res = [];
+  input.forEach((arr, j) => {
+    if(j !== ind) {
+      res.push(arr);
+    }
+  });
+  return res;
+};
+
+day18Part2 = input => {
+  let max = 0;
+  input.forEach((arri, ind) => {
+    exclude(input, ind).forEach(arrj => {
+      const res = day18Part1(tillNoEorS(objRec([arri, arrj])));
+      max = res > max ? res : max;
+    });
+  });
+  return max;
+};
+
+console.log(day18Part2(real));
+
