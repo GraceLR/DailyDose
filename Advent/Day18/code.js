@@ -102,10 +102,7 @@ const tillNoEorS = obj => {
   return obj;
 };
 
-// console.log(tillNoEorS(objRec([[[[0,[4,5]],[0,0]],[[[4,5],[2,6]],[9,5]]],
-//   [7,[[[3,7],[4,3]],[[6,3],[8,8]]]]])))
-
-const day18Part1 = input => {
+const addition = input => {
 
   const arr0 = [input[0], input[1]];
   const obj0 = objRec(arr0);
@@ -122,7 +119,34 @@ const day18Part1 = input => {
   return nextObj;
 };
 
-day18Part1(test);
+day18Part1 = input => {
+  if(typeof input[0] === 'number' && typeof input[1] === 'number') {
+    for(let i = 0; i <= 1; i++) {
+      if(input['parent'][i] === input) {
+        input['parent'][i] = (3 * input[0]) + (2 * input[1]);
+      }
+    }
+    return;
+  } else {
+    for(let i = 0; i <= 1; i++) {
+      if(typeof input[i] === 'object') {
+       day18Part1(input[i]);
+      }
+    }
+    if(input.parent !== undefined) {
+      for(let i = 0; i <= 1; i++) {
+        if(input['parent'][i] === input) {
+          input['parent'][i] = (3* input[0]) + (2 * input[1]);
+        }
+      }
+    } else {
+      return (3* input[0]) + (2 * input[1]);
+    }
+  }
+  return;
+};
+
+console.log(day18Part1(addition(real)));
 
 // stack
 // const recWithoutRecursion = input => {
