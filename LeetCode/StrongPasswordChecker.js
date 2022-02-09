@@ -2,26 +2,36 @@
 
 const check = password => {
 
-    let charCheck = 3;
+    let charCheckNum = 1;
+    let charCheckLower = 1;
+    let charCheckUpper = 1;
+    const charCheck = () => charCheckNum + charCheckLower + charCheckUpper;
 
-    let repeatCheck = 0;
+    let repeat3Check = 0;
+    let repeat4Check = 0;
     let temp = [];
 
     for(let i = 0; i < password.length; i++) {
 
         const ele = password[i];
 
-        if(Number.isInteger(Number(ele))) {
-            charCheck -= 1;
-        } else if(ele === ele.toLowerCase()) {
-            charCheck -= 1;
-        } else if(ele === ele.toUpperCase()) {
-            charCheck -= 1;
+        if(charCheck() > 0) {
+            if(Number.isInteger(Number(ele))) {
+                charCheckNum = 0;
+            } else if(ele === ele.toLowerCase()) {
+                charCheckLower = 0;
+            } else if(ele === ele.toUpperCase()) {
+                charCheckUpper = 0;
+            }
         }
 
         if(temp.length !== 0 && ele === temp[temp.length - 1]) {
             if(temp.length === 2) {
-                repeatCheck += 1;
+                if(ele !== password[i + 1]) {
+                    repeat3Check += 1;
+                } else {
+                    repeat4Check += 1;
+                }
                 temp = [];
             } else {
                 temp.push(ele);
@@ -32,20 +42,20 @@ const check = password => {
 
     }
 
-    charCheck = charCheck < 0 ? 0 : charCheck;
-
     const len = password.length;
 
     if(len < 6) {
-        const other = repeatCheck + (6 - len);
-        return Math.max(charCheck, other);
+
+        const other = Math.max(repeat3Check, (6 - len));
+        return Math.max(Math.max(charCheck(), repeat4Check), other);
     } else if (len > 20) {
-        const other = charCheck + (20 - len);
-        return Math.max(repeatCheck, other);
+
+        const other = Math.max(charCheck(), repeat4Check) + (len - 20);
+        return Math.max(repeat3Check, other);
     } else {
-        return Math.max(repeatCheck, charCheck);
+        return Math.max(repeat3Check, Math.max(charCheck(), repeat4Check));
     }
-    
+
 };
 
-check('1337C0d3')
+console.log(check("1111111111"))
