@@ -119,8 +119,7 @@ const check = password => {
 
 };
 
-console.log(check("aaabbbbbbbbccc"))
-
+console.log(check("bbaaaaaaaaaaaaaaacccccc"))
 
 
 
