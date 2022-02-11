@@ -9,7 +9,7 @@ const check = password => {
     
 
     let repeat = {};
-    let temp = [];
+    let temp = [password[0]];
 
     for(let i = 0; i < password.length; i++) {
 
@@ -25,31 +25,33 @@ const check = password => {
             }
         }
 
-        if(temp.length !== 0 && ele === temp[temp.length - 1]) {
-            temp.push(ele);
-        } else {
-            if(temp.length >= 3) {
-                repeat[temp.length] = repeat[temp.length] === undefined ?
-                1 : repeat[temp.length] + 1;
+        if(i > 0) {
+            if(ele === temp[temp.length - 1]) {
+                temp.push(ele);
+                if( i === password.length - 1 && temp.length >= 3) {
+                    repeat[temp.length] = repeat[temp.length] === undefined ? 1 : repeat[temp.length] + 1;
+                }
+            } else {
+                if(temp.length >= 3) {
+                    repeat[temp.length] = repeat[temp.length] === undefined ? 1 : repeat[temp.length] + 1;
+                }
+                temp = [ele];
             }
-            temp = [ele];
         }
-
     }
 
     let charCheck = charCheckFn();
     const len = password.length;
+    const repeatKeys = () => Object.keys(repeat).sort((a, b) => b - a);
 
     if(len < 6) {
 
-        const other = Math.max(repeatCheck, (6 - len));
-        return Math.max(Math.max(charCheck), other);
+        const insert = Object.keys(repeat).length === 0 ? 0 : 1;
+        return Math.max(Math.max(charCheck, insert), 6 - len);
 
     } else if (len > 20) {
 
         let steps = 0;
-    
-        const repeatKeys = () => Object.keys(repeat).sort((a, b) => b - a);
 
         while(charCheck > 0) {
             const repeatLets = repeatKeys();
@@ -98,20 +100,26 @@ const check = password => {
 
         let repl = 0;
         repeatKeys().forEach(num => {
-            repl += Math.floor(num / 3);
+            repl += (Math.floor(num / 3)) * repeat[num];
         });
 
         steps += charCheck + lenDele + repl;
 
         return steps;
-        
+
     } else {
-        return Math.max(repeat3Check, Math.max(charCheck(), repeat4Check));
+
+        let repl = 0;
+        repeatKeys().forEach(num => {
+            repl += (Math.floor(num / 3)) * repeat[num];
+        });
+        return Math.max(charCheck, repl);
+
     }
 
 };
 
-console.log(check("aaaabbbbccccddeeddeeddeedd"))
+console.log(check("aaabbbbbbbbccc"))
 
 
 
