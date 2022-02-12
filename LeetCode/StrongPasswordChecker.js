@@ -73,10 +73,13 @@ const check = password => {
         }
 
         let lenDele = len - 20;
-        while(lenDele > 0) {
+        let condition = true;
+
+        while(lenDele > 0 && condition) {
             const repeatLets = repeatKeys();
             if(repeatLets.length > 0) {
-                repeatLets.forEach(num => {
+                for(let i = 0; i < repeatLets.length; i++) {
+                    const num = repeatLets[i];
                     const residule = num % 3;
                     if(lenDele >= residule + 1) {
                         steps += residule + 1;
@@ -90,9 +93,12 @@ const check = password => {
                             repeat[num - residule - 1] === undefined ? 
                             1 : repeat[num - residule - 1] + 1;
                         }
-                        return;
+                        break;
                     }
-                });
+                    if(i === repeatLets.length - 1) {
+                        condition = false;;
+                    }
+                }                    
             } else {
                 break;
             }
