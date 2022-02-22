@@ -14,7 +14,6 @@ const fnXOR = (num, arr) => {
 };
 
 const findMaximumXOR = nums => {
-
   const numsLen = nums.length;
 
   if (numsLen === 1) {
@@ -66,7 +65,8 @@ const findMaximumXOR = nums => {
         if(groupBinLen() <= i) {
           for(let j = pos; j < numsLen; j++) {
             const num = numsSorted[j];
-            const group = maxNumBinLen - Math.floor(Math.log2(num + 1));
+            const bin = num.toString(2);
+            const group = maxNumBinLen - bin.length;
             if(group > i) {
                 pos = j - 1;
               break;
@@ -85,7 +85,6 @@ const findMaximumXOR = nums => {
           maxXOR = XOR > maxXOR ? XOR : maxXOR;
 
         }
-
       }
 
       if(i === maxNumBinLen - 1 && cond) {
@@ -96,8 +95,9 @@ const findMaximumXOR = nums => {
           lastGroup = [minNum];
           for(let i = numsLen - 2; i >= 0; i--) {
             const num = numsSorted[i];
-            const binLen = Math.floor(Math.log2(num) + 1);
-            if(binLen > Math.floor(Math.log2(minNum) + 1)) {
+            const bin = num.toString(2);
+            const binLen = bin.length;
+            if(binLen > minNum.toString(2).length) {
               break;
             }
             lastGroup.push(num);
@@ -110,7 +110,6 @@ const findMaximumXOR = nums => {
         maxXOR = XOR > maxXOR ? XOR : maxXOR;
 
       }
-
     }
   });
 
