@@ -43,7 +43,7 @@ var originalDigits = s => {
         while(sObj[l] > 0) {
             const numOptions = Object.keys(ruleObj[l]);
             if(numOptions.length === 1) {
-                res.push(numObj(numOptions[0]));
+                res.push(numObj[numOptions[0]]);
                 numOptions[0].split('').forEach(ele => {
                     sObj[ele] -= ruleObj[ele][numOptions[0]];
                 });
@@ -73,4 +73,4 @@ var originalDigits = s => {
     return res.sort().join('');
 };
 
-console.log(originalDigits('fviefuro'))
+console.log(originalDigits('zeor'))
