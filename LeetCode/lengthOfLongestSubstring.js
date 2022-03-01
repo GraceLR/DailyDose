@@ -1,4 +1,5 @@
 
+
 const lengthOfLongestSubstring = s => {
 
     let maxLen = 0;
@@ -12,8 +13,6 @@ const lengthOfLongestSubstring = s => {
             len ++;
         } else {
             maxLen = len > maxLen ? len : maxLen;
-            len = 1;
-            obj = {};
         }
         obj[l] = 1;
     }
@@ -22,4 +21,4 @@ const lengthOfLongestSubstring = s => {
 
 };
 
-console.log(lengthOfLongestSubstring('abcabcbb'))
+console.log(lengthOfLongestSubstring('abcabcdbb'))
