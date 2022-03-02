@@ -13,14 +13,15 @@ const lengthOfLongestSubstring = s => {
 
         const l = s[i];
 
-        if(obj[l] === undefined) {
+        if(obj[l] !== undefined && obj[l] >= left) {
+
+            len = i - left;
+            left = obj[l] + 1;
+
+        } else {
 
             len = i - left + 1;
 
-        } else if(obj[l] >= left) {
-            
-            len = i - left;
-            left = obj[l] + 1;
         }
 
         obj[l] = i;
@@ -33,7 +34,7 @@ const lengthOfLongestSubstring = s => {
 };
 
 
-console.log(lengthOfLongestSubstring('dvdf'))
+console.log(lengthOfLongestSubstring("tmmzuxt"))
 console.log(lengthOfLongestSubstring('pwwkew'))
 console.log(lengthOfLongestSubstring('abcabcbf'))
 console.log(lengthOfLongestSubstring("ckilbkd"))
