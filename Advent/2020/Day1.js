@@ -32,16 +32,39 @@ const sumtwo = (input, target) => {
     for(let i = 0; i < input.length; i++) {
 
         const num = input[i];
-        obj[num] = true;
 
         if(obj[target - num] === true) {
-            return num * (target - num);
+            // return num * (target - num); for Day1
+            return { 1: num, 2: target - num }; // for Day2
+        }
+
+        obj[num] = true;
+
+    }
+
+    return null; // for Day2
+
+};
+
+const sumthree = (input, target) => {
+
+    let inputCopy = input.slice(0);
+
+    for(let i = 0; i < input.length; i++) {
+
+        const sum = target - input[i];
+        inputCopy.shift();
+        const day1 = sumtwo(inputCopy, sum);
+
+        if(day1) {
+            return day1['1'] * day1['2'] * input[i];
         }
 
     }
+
 };
 
-console.log(sumtwo(
+console.log(sumthree(
     [
     1895,
     1504,
@@ -244,3 +267,14 @@ console.log(sumtwo(
     1995,
     1937
 ], 2020))
+
+// console.log(sumthree(
+//     [
+//         1721,
+//         979,
+//         366,
+//         299,
+//         675,
+//         1456
+//     ], 2020
+// ))
