@@ -1,26 +1,44 @@
 
 // version 1
 
+// const sumtwo = (input, target) => {
+
+//     const len = input.length;
+//     const sortedinput = input.sort((a, b) =>  a - b);
+//     let ileft = 0;
+//     let iright = len - 1;
+//     const sum = () => sortedinput[ileft] + sortedinput[iright];
+
+//     while(!(target === sum())) {
+
+//         if(target > sum()) {
+//             ileft += 1;
+//         } else if(target < sum()) {
+//             iright -= 1;
+//         }
+
+//     }
+
+//     return sortedinput[ileft]* sortedinput[iright];
+
+// };
+
+// version 2
+
 const sumtwo = (input, target) => {
 
-    const len = input.length;
-    const sortedinput = input.sort((a, b) =>  a - b);
-    let ileft = 0;
-    let iright = len - 1;
-    const sum = () => sortedinput[ileft] + sortedinput[iright];
+    let obj = {};
 
-    while(!(target === sum())) {
+    for(let i = 0; i < input.length; i++) {
 
-        if(target > sum()) {
-            ileft += 1;
-        } else if(target < sum()) {
-            iright -= 1;
+        const num = input[i];
+        obj[num] = true;
+
+        if(obj[target - num] === true) {
+            return num * (target - num);
         }
 
     }
-
-    return sortedinput[ileft]* sortedinput[iright];
-
 };
 
 console.log(sumtwo(
