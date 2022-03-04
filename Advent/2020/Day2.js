@@ -1,30 +1,57 @@
 
 
-const part1 = input => {
+// const part1 = input => {
+
+//     let res = 0;
+
+//     input.forEach(arr => {
+
+//         const min = arr[0];
+//         const max = arr[1];
+//         const l = arr[2];
+//         const pw = arr[3];
+//         let ct = 0;
+
+//         for(let i = 0; i < pw.length; i++) {
+
+//             if(pw[i] === l) {
+//                 ct++;
+//             }
+
+//             if(ct > max) {
+//                 break;
+//             }
+
+//         }
+
+//         if(ct >= min && ct <= max) {
+//             res++;
+//         }
+
+//     });
+
+//     return res;
+
+// };
+
+const part2 = input => {
 
     let res = 0;
 
     input.forEach(arr => {
 
-        const min = arr[0];
-        const max = arr[1];
+        const pos = [arr[0] - 1, arr[1] - 1];
         const l = arr[2];
         const pw = arr[3];
         let ct = 0;
 
-        for(let i = 0; i < pw.length; i++) {
-
-            if(pw[i] === l) {
+        pos.forEach(ele => {
+            if(pw[ele] === l) {
                 ct++;
             }
+        });
 
-            if(ct > max) {
-                break;
-            }
-
-        }
-
-        if(ct >= min && ct <= max) {
+        if(ct === 1) {
             res++;
         }
 
@@ -1039,4 +1066,4 @@ const input =
     [6,7,'w','wwwwwwqww']
 ]
 
-console.log(part1(input));
+console.log(part2(input));
