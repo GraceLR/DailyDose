@@ -61,7 +61,6 @@ const temp = input => {
 const rec = (objMap, step) => {
 
   if(step === 'end') {
-    console.log(step, '-----------')
     return 1;
   } else if(
     objMap[step]['count'] === 2 || 
