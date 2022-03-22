@@ -1,25 +1,80 @@
 
-const part1 = input => {
+// const part1 = input => {
 
-  let count = 0;
+//   let count = 0;
+//   const len = input[0].length;
+
+//   for (let i = 1; i < input.length; i++) {
+
+//     const dot = 3 * i;
+//     const row = input[i];
+
+//     if (row[dot % len] === '#') {
+
+//       count++;
+
+//     }
+
+//   }
+
+//   return count;
+
+// };
+
+
+const part2 = input => {
+
+  let count = [0, 0, 0, 0, 0];
   const len = input[0].length;
-
+  const slopes = [1, 3, 5, 7];
+  
   for (let i = 1; i < input.length; i++) {
 
-    const dot = 3 * i;
     const row = input[i];
 
-    if (row[dot % len] === '#') {
+    slopes.forEach((slope, j) => {
 
-      count++;
+      const dot = slope * i;
 
-    }
+      if (row[dot % len] === '#') {
 
+        count[j] += 1;
+
+      }
+
+      if (i % 2 === 0 && j === 0 && row[(i / 2) % len] === '#') {
+
+        count[4] += 1;
+        
+      }
+
+    });
+  
   }
 
-  return count;
-
+  let res = 1;
+  count.forEach(ele => {
+    res = res * ele;
+  });
+  
+  return res;
+  
 };
+
+
+//   const test = [
+//     '..##.......',
+//     '#...#...#..',
+//     '.#....#..#.',
+//     '..#.#...#.#',
+//     '.#...##..#.',
+//     '..#.##.....',
+//     '.#.#.#....#',
+//     '.#........#',
+//     '#.##...#...',
+//     '#...##....#',
+//     '.#..#...#.#',
+//   ]
 
 const test = [
   '......##....#...#..#.#....#....',
@@ -347,4 +402,4 @@ const test = [
   '..#..#.......#....#....###.#...',
 ];
 
-console.log(part1(test));
+console.log(part2(test));
