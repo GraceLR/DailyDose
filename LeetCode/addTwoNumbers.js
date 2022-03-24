@@ -1,50 +1,118 @@
 
 
 
- const ListNode = (val, next) => ({
-     val: (val===undefined ? 0 : val),
-     next: (next===undefined ? null : next)
- });
+const listNode = input => {
 
-const nodes = (input, zeroNum) => {
-    let next = null;
-    const len = input.length;
+    let obj = {};
+    let next = obj;
 
-    for (let i = 0; i < zeroNum; i++) {
-        next = ListNode(0, next);
-    }
+    input.forEach((ele, i) => {
 
-    for (let i = 0; i < len; i++) {
+        next.val = ele;
+        
+        if (i === input.length - 1) {
 
-        const ele = input[i];
-        next = ListNode(ele, next);
-    }
+            next.next = null;
 
-    return next;
+        } else {
+
+            next.next = {};
+
+        }
+
+        next = next.next;
+
+    });
+
+    return obj;
 
 };
+
+// const addTwoNumbers = (l1, l2) => {
+//     let obj = null;
+//     let next = null;
+//     let carry = 0;
+//     while (l1 || l2 || carry > 0) {
+//         const sum = carry + (l1?.val ?? 0) + (l2?.val ?? 0);
+//         var num = sum % 10;
+//         carry = Math.floor(sum / 10);
+
+//         if (obj === null) {
+//             obj = ListNode(num, null);
+//             next = obj;
+//         } else {
+//             next.next = ListNode(num, null);
+//             next = next.next;
+//         }
+
+//         l1 = l1?.next;
+//         l2 = l2?.next;
+//     }
+    
+//     return obj;
+// };
+
+// const addTwoNumbers = (l1, l2) => {
+
+//     let obj = null;
+//     let next = null;
+//     let carry = 0;
+//     while (l1 || l2 || carry > 0) {
+//         const sum = carry + (l1?.val ?? 0) + (l2?.val ?? 0);
+//         var num = sum > 9 ? sum - 10 : sum;
+//         carry = sum > 9 ? 1 : 0;
+
+//         if (obj === null) {
+//             obj = ListNode(num, null);
+//             next = obj;
+//         } else {
+//             next.next = ListNode(num, null);
+//             next = next.next;
+//         }
+
+//         l1 = l1?.next;
+//         l2 = l2?.next;
+//     }
+    
+//     return obj;
+
+// };
 
 const addTwoNumbers = (l1, l2) => {
 
-    const l1Len = l1.length;
-    const l2Len = l2.length;
-    const len = Math.max(l1Len, l2Len);
-    const obj1 = nodes(l1, len - l1Len);
-    const obj2 = nodes(l2, len - l2Len);
+    let obj = {};
+    let next = obj;
+    let carry = 0;
 
-    const rec = (next1, next2, carry = 0) => {
+    while (l1 || l2 || carry > 0) {
 
-        if (!next1 && !next2) {
-            return carry === 0 ? [] : [carry];
+        const sum = (l1?.val ?? 0) + (l2?.val ?? 0) + carry;
+        const num = sum % 10;
+        carry = Math.floor(sum / 10);
+
+        next.val = num;
+
+        if (!l1 && !l2) {
+
+            next.next = null;
+
+        } else {
+
+            next.next = {};
+
         }
 
-        var num = (carry + next1.val + next2.val) % 10
-        var nextCarry = Math.floor((carry + next1.val + next2.val) / 10)
+        next = next.next;
 
-        return [num, ...rec(next1.next, next2.next, nextCarry)];
-    };
+        l1 = l1?.next;
+        l2 = l2?.next;
 
-    return rec(obj1, obj2);
+    }
+
+    return obj;
+
 };
 
-console.log(addTwoNumbers([9,9,9,9,9,9,9], [9,9,9,9]));
+
+
+console.log(addTwoNumbers(listNode([9,9,9,9,9,9,9]), listNode([9,9,9,9])));
