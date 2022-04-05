@@ -13,28 +13,67 @@ const reverse = str => {
 
 };
 
+// const longestPalindrome = s => {
+
+//   const sLen = s.length;
+//   const revS = reverse(s);
+
+//   for (let subLen = sLen; subLen > 0; subLen--) {
+
+//     const bound = sLen - subLen;
+
+//     for (let i = 0; i <= bound; i++) {
+
+//       const sSub = s.substr(i, subLen);
+//       const revSub = revS.substr(bound - i, subLen);
+
+//       if (sSub === revSub) {
+
+//         return sSub;
+
+//       }
+
+//     }
+
+//   }
+
+// };
+
 const longestPalindrome = s => {
 
-  const sLen = s.length;
-  const revS = reverse(s);
+    const revS = reverse(s);
+    const sLen = s.length;
+    let sSub = '';
+    let revSub = '';
+    let res = '';
 
-  for (let subLen = sLen; subLen > 0; subLen--) {
+    for (let i = 0; i < sLen; i++) {
 
-    const bound = sLen - subLen;
+        const sChar = s[i];
+        const revChar = revS[sLen - i - 1];
 
-    for (let i = 0; i <= bound; i++) {
+        sSub += sChar;
+        revSub = revChar + revSub;
 
-      const sSub = s.substr(i, subLen);
-      const revSub = revS.substr(bound - i, subLen);
+        if (sSub === revSub) {
 
-      if (sSub === revSub) {
+            if (sSub.length > res.length) {
 
-        return sSub;
+                res = sSub;
 
-      }
+            } 
+
+        } else {
+
+            sSub = sChar;
+            revSub = revChar;
+
+        }
 
     }
 
-  }
+    return res;
 
 };
+
+console.log(longestPalindrome('acaba'))

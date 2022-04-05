@@ -173,7 +173,5 @@ const check = password => {
 
 };
 
-console.log(check("aaaaAAAAAA00123456"));
-
 
 
