@@ -18,22 +18,38 @@ const myAtoi = s => {
 
         if (!res) {
  
-            if (char === '-' && !sign['cond']) {
+            if (char === '-') {
 
-                sign['value'] = -1;
-                sign['cond'] = true;
-                maxInt = 2 ** 31;
-                maxIntModu = maxInt % 10;
+                if (sign['cond']) {
+
+                    return 0;
+
+                } else {
+
+                    sign['value'] = -1;
+                    sign['cond'] = true;
+                    maxInt = 2 ** 31;
+                    maxIntModu = maxInt % 10;
+
+                }
 
             } else if (char === '+') {
 
-                sign['cond'] = true;
+                if (sign['cond']) {
+
+                    return 0;
+
+                } else {
+
+                    sign['cond'] = true;
+
+                }
 
             } else if (charValue) {
 
                 res = charValue;
 
-            } else if (char !== ' ' && sign['cond']) {
+            } else if (char !== ' ') {
 
                 return 0;
 
@@ -69,4 +85,4 @@ const myAtoi = s => {
 
 };
 
-console.log(myAtoi(' +- 120'))
+console.log(myAtoi(' + r120'))
