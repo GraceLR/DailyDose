@@ -81,8 +81,14 @@ const myAtoi = s => {
 
     }
 
+    if (!res) {
+
+        res = 0;
+
+    }
+
     return res * sign['value'];
 
 };
 
-console.log(myAtoi(' + r120'))
+console.log(myAtoi(''))
