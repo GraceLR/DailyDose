@@ -8,7 +8,7 @@ const myAtoi = s => {
     let maxInt = (2 ** 31) - 1;
     let maxIntModu = maxInt % 10;
     let res = undefined;
-    let sign = 1;
+    let sign = { cond: undefined, value: 1};
     let i = 0;
 
     while (i < sLen) {
@@ -18,9 +18,10 @@ const myAtoi = s => {
 
         if (!res) {
  
-            if (char === '-') {
+            if (char === '-' && !sign['cond']) {
 
-                sign = -1;
+                sign['value'] = -1;
+                sign['cond'] = true;
                 maxInt = 2 ** 31;
                 maxIntModu = maxInt % 10;
 
@@ -28,7 +29,7 @@ const myAtoi = s => {
 
                 res = charValue;
 
-            } else if (char.toLowerCase() !== char.toUpperCase()) {
+            } else if (char !== ' ' && sign['cond']) {
 
                 return 0;
 
@@ -38,7 +39,7 @@ const myAtoi = s => {
 
             if (charValue === undefined) {
 
-                return res * sign;
+                return res * sign['value'];
 
             } else {
 
@@ -46,7 +47,7 @@ const myAtoi = s => {
                     (res >= (maxInt - maxIntModu) / 10 &&
                     charValue >= maxIntModu + 1)) {
         
-                return maxInt * sign ;
+                return maxInt * sign['value'] ;
         
                 }
              
@@ -60,7 +61,8 @@ const myAtoi = s => {
 
     }
 
-    return res * sign;
+    return res * sign['value'];
+
 };
 
-console.log(myAtoi('  - 102172361723612736127361827638w   6'))
+console.log(myAtoi(' -+ 120'))
