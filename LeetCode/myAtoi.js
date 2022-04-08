@@ -5,8 +5,8 @@ const myAtoi = s => {
     const obj = { 0: 0, 1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9 };
 
     let sLen = s.length;
-    const maxInt = (2 ** 31) - 1;
-    const maxIntModu = maxInt % 10;
+    let maxInt = (2 ** 31) - 1;
+    let maxIntModu = maxInt % 10;
     let res = undefined;
     let sign = 1;
     let i = 0;
@@ -21,16 +21,22 @@ const myAtoi = s => {
             if (char === '-') {
 
                 sign = -1;
+                maxInt = 2 ** 31;
+                maxIntModu = maxInt % 10;
 
             } else if (charValue) {
 
                 res = charValue;
 
+            } else if (char.toLowerCase() !== char.toUpperCase()) {
+
+                return 0;
+
             }
 
         } else {
 
-            if (!charValue) {
+            if (charValue === undefined) {
 
                 return res * sign;
 
@@ -40,7 +46,7 @@ const myAtoi = s => {
                     (res >= (maxInt - maxIntModu) / 10 &&
                     charValue >= maxIntModu + 1)) {
         
-                return ((2 ** 31) - 1) * sign ;
+                return maxInt * sign ;
         
                 }
              
@@ -57,4 +63,4 @@ const myAtoi = s => {
     return res * sign;
 };
 
-console.log(myAtoi('    -123123719823791827391827391827182371232  asda3sd'))
+console.log(myAtoi('  - 102172361723612736127361827638w   6'))
