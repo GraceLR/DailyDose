@@ -25,6 +25,10 @@ const myAtoi = s => {
                 maxInt = 2 ** 31;
                 maxIntModu = maxInt % 10;
 
+            } else if (char === '+') {
+
+                sign['cond'] = true;
+
             } else if (charValue) {
 
                 res = charValue;
@@ -65,4 +69,4 @@ const myAtoi = s => {
 
 };
 
-console.log(myAtoi(' -+ 120'))
+console.log(myAtoi(' +- 120'))
