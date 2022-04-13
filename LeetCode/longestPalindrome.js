@@ -39,6 +39,7 @@ const reverse = str => {
 
 // };
 
+
 const longestPalindrome = s => {
 
   const revS = reverse(s);

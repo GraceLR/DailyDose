@@ -24,12 +24,6 @@
 
 //     while (i > 0 && numsSorted[i] === numsSorted[i - 1]) {
 
-//         if (i === len - 1) {
-
-//             return res;
-
-//         }
-
 //       i++;
 
 //     }
