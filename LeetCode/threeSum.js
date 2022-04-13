@@ -15,6 +15,12 @@ const threeSum = nums => {
 
   for (let i = 0; i < nums.length; i++) {
 
+    if (numsSorted[i] > 0) {
+
+        break;
+
+    }
+
     while (i > 0 && numsSorted[i] === numsSorted[i - 1]) {
 
       i++;
@@ -49,4 +55,73 @@ const threeSum = nums => {
 
 };
 
-console.log(threeSum([0]));
+
+// twoSum on after i
+
+// const threeSum = nums => {
+
+//     const numsSorted = nums.sort((a, b) => a - b);
+
+//     const twoSum = (pos, rem) => {
+
+//         let obj = {};
+//         let res = [];
+
+//         for (let i = pos; i < numsSorted.length; i++) {
+
+//             const num = numsSorted[i];
+//             const num2 = rem - num; 
+
+//             if (obj[num2] && !obj[num]) {
+    
+//                 res.push([num2, num]);
+
+//             }
+
+//             obj[num] = i;
+
+//         }
+
+//         return res;
+
+//     };
+
+//     let res = [];
+//     const len = numsSorted.length;
+
+//     for (let i = 0; i < len; i++) {
+
+//         while (i > 0 && numsSorted[i] === numsSorted[i - 1]) {
+
+//             i++;
+
+//             if (i === len) {
+
+//                 return res;
+
+//             }
+
+//         }
+
+//         const num = numsSorted[i];
+//         const twoSumRes = twoSum(i + 1, -num);
+//         const twoSumResLen = twoSumRes.length;
+
+//         if (twoSumResLen > 0) {
+
+//           twoSumRes.forEach(arr => {
+
+//             arr.push(num);
+//             res.push(arr);
+
+//           });
+
+//         }
+
+//     }
+
+//     return res;
+
+// };
+
+console.log(threeSum([0,0,0,0]));
