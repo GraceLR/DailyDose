@@ -1,4 +1,55 @@
 
+// const threeSumClosest = (nums, target) => {
+
+//   const numsSorted = nums.sort((a, b) => a - b);
+//   const len = nums.length;
+//   let dis = Number.MAX_VALUE;
+//   let res = 0;
+
+//   for (let i = 0; i < len; i++) {
+
+//     const num1 = numsSorted[i];
+
+//     for (let j = i + 1; j < len; j++) {
+
+//       const num2 = numsSorted[j];
+//       let disLocal = Number.MAX_VALUE;
+
+//       for (let k = j + 1; k < len; k++) {
+
+//         const num3 = numsSorted[k];
+//         const sum = num1 + num2 + num3;
+//         const curDis = Math.abs(sum - target);
+
+//         if (curDis <= disLocal) {
+
+//           disLocal = curDis;
+
+//           if (curDis < dis) {
+
+//             dis = curDis;
+//             res = sum;
+
+//           }
+
+//         } else {
+
+//           break;
+
+//         }
+
+
+//       }
+
+//     }
+
+//   }
+
+//   return res;
+    
+// };
+
+
 const threeSumClosest = (nums, target) => {
 
   const numsSorted = nums.sort((a, b) => a - b);
@@ -6,47 +57,44 @@ const threeSumClosest = (nums, target) => {
   let dis = Number.MAX_VALUE;
   let res = 0;
 
-  for (let i = 0; i < len; i++) {
+  for (let i = 0; i < len - 2; i++) {
 
-    const num1 = numsSorted[i];
+    const localTarget = target - numsSorted[i];
+    let left = i + 1;
+    let right = len - 1;
 
-    for (let j = i + 1; j < len; j++) {
+    while (left < right) {
 
-      const num2 = numsSorted[j];
-      let disLocal = Number.MAX_VALUE;
+      const sum = numsSorted[left] + numsSorted[right];
+      const abs = Math.abs(sum - localTarget);
+      
+      if (abs < dis) {
 
-      for (let k = j + 1; k < len; k++) {
+        dis = abs;
+        res = sum + numsSorted[i];
 
-        const num3 = numsSorted[k];
-        const sum = num1 + num2 + num3;
-        const curDis = Math.abs(sum - target);
+      }
 
-        if (curDis <= disLocal) {
+      if (sum < localTarget) {
 
-          disLocal = curDis;
+        left++;
 
-          if (curDis < dis) {
+      } else if (sum > localTarget) {
 
-            dis = curDis;
-            res = sum;
+        right--;
 
-          }
+      } else {
 
-        } else {
-
-          break;
-
-        }
-
+        return target;
 
       }
 
     }
-
+    
   }
 
-  return res;
-    
+return res;
+
 };
 
-console.log(threeSumClosest([0,0,0], 1));
+console.log(threeSumClosest([-1,2,1,-4], 1));
