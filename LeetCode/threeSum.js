@@ -1,4 +1,5 @@
 
+
 // const threeSum = nums => {
 
 //   const numsSorted = nums.sort((a, b) => a - b);
@@ -59,68 +60,68 @@
 
 // twoSum on after i
 
-const threeSum = nums => {
+// const threeSum = nums => {
 
-  const numsSorted = nums.sort((a, b) => a - b);
-  let res = [];
-  const len = numsSorted.length;
+//   const numsSorted = nums.sort((a, b) => a - b);
+//   let res = [];
+//   const len = numsSorted.length;
 
-  for (let i = 0; i < len; i++) {
+//   for (let i = 0; i < len; i++) {
 
-    if (numsSorted[i] > 0) {
+//     if (numsSorted[i] > 0) {
 
-      break;
+//       break;
 
-    }
+//     }
 
-    while (i > 0 && numsSorted[i] === numsSorted[i - 1]) {
+//     while (i > 0 && numsSorted[i] === numsSorted[i - 1]) {
 
-      if (i === len - 1) {
+//     //   if (i === len - 1) {
 
-        return res;
+//     //     return res;
 
-      }
+//     //   }
 
-      i++;
+//       i++;
 
-    }
+//     }
 
-    const num = numsSorted[i];
-    const rem = -num;
-    let left = i + 1;
-    let right = len - 1;
+//     const num = numsSorted[i];
+//     const rem = -num;
+//     let left = i + 1;
+//     let right = len - 1;
         
-    while (left < right) {
+//     while (left < right) {
 
-      const sum = numsSorted[left] + numsSorted[right];
+//       const sum = numsSorted[left] + numsSorted[right];
 
-      if (sum > rem) {
+//       if (sum > rem) {
 
-        right--;
+//         right--;
 
-      } else if (sum < rem) {
+//       } else if (sum < rem) {
 
-        left++;
+//         left++;
 
-      } else {
+//       } else {
 
-        res.push([num, numsSorted[left], numsSorted[right]]);
-        left++;
+//         res.push([num, numsSorted[left], numsSorted[right]]);
+//         left++;
 
-        while (numsSorted[left] === numsSorted[left - 1]) {
+//         while (numsSorted[left] === numsSorted[left - 1]) {
 
-          left++;
+//           left++;
 
-        }
+//         }
 
-      }
+//       }
 
-    }
+//     }
 
-  }
+//   }
 
-  return res;
+//   return res;
 
-};
+// };
 
 console.log(threeSum([-1,0,1,2,-1,-4]));
