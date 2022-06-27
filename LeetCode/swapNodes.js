@@ -21,3 +21,14 @@ const swapPairs = (head) =>{
     }
     return head;
 };
+
+const swapPairs = (head) => {
+    if (!head || !head.next) {
+        return head;
+    }
+    let prev = head.next;
+    let newHead = prev.next;
+    prev.next = head;
+    head.next = swapPairs(newHead);
+    return prev;
+};
