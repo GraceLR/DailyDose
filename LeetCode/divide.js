@@ -1,13 +1,32 @@
 const absolute = num => num >= 0 ? num : -num;
+
+// const divide = (dividend, divisor) => {
+//     let residual = absolute(dividend);
+//     let absDivisor = absolute(divisor);
+//     let result = 0;
+//     while (residual >= absDivisor) {
+//         residual -= absDivisor;
+//         result++;
+//     }
+//     return dividend * divisor >= 0 ? result : -result;
+// };
+
+const rec = (num, residual) => {
+    if (num > residual) {
+        return 0;
+    }
+    let n = 0;
+    while ((2 ** (n + 1)) * num <= residual) {
+        n++;
+    }
+    return (2 ** n) + rec(num, residual - (2 ** n) * num);
+};
+
 const divide = (dividend, divisor) => {
     let residual = absolute(dividend);
     let absDivisor = absolute(divisor);
-    let result = 0;
-    while (residual >= absDivisor) {
-        residual -= absDivisor;
-        result++;
-    }
-    return dividend * divisor >= 0 ? result : -result;
+    const res = rec(absDivisor, residual);
+    return dividend * divisor < 0 ? -res : res;
 };
 
-console.log(divide(-2147483648, -1));
+console.log(divide(-2147483648, 5));
