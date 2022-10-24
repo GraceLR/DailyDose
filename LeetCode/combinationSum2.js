@@ -64,5 +64,3 @@ var combinationSum2 = function (candidates, target) {
   rec(0, target, []);
   return result;
 };
-
-console.log(combinationSum2([10, 1, 2, 7, 6, 1, 5], 8));
