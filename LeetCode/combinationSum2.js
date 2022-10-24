@@ -25,7 +25,7 @@ var combinationSum2 = function (candidates, target) {
         left = mid + 1;
       }
     }
-    return { found: false, pos: mid + 1 };
+    return { found: false, pos: left };
   };
   const rec = (pos, target, resArr) => {
     if (sortedCdd[len - 1] > target) {
@@ -33,8 +33,10 @@ var combinationSum2 = function (candidates, target) {
     }
     for (let i = pos; i < len; i++) {
       const num = sortedCdd[i];
-      if (!(num > target || (i > 0 && num === sortedCdd[i - 1]))) {
-        const newResArr = [...resArr, num];
+      const newResArr = [...resArr, num];
+      if (num === target) {
+        result.push(newResArr);
+      } else if (!(num > target || (i > pos && num === sortedCdd[i - 1]))) {
         const newTarget = target - num;
         const res = binSearch(i + 1, newTarget);
         let newPos;
