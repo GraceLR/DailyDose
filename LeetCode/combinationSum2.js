@@ -24,6 +24,7 @@ var combinationSum2 = function (candidates, target) {
       } else {
         left = mid + 1;
       }
+      mid = Math.floor((left + right) / 2);
     }
     return { found: false, pos: left };
   };
@@ -64,4 +65,4 @@ var combinationSum2 = function (candidates, target) {
   return result;
 };
 
-console.log(combinationSum2([2, 5, 2, 1, 2], 5));
+console.log(combinationSum2([10, 1, 2, 7, 6, 1, 5], 8));
