@@ -33,26 +33,28 @@ var combinationSum2 = function (candidates, target) {
     }
     for (let i = pos; i < len; i++) {
       const num = sortedCdd[i];
-      const newResArr = [...resArr, num];
-      if (num === target) {
-        result.push(newResArr);
-      } else if (!(num > target || (i > pos && num === sortedCdd[i - 1]))) {
-        const newTarget = target - num;
-        const res = binSearch(i + 1, newTarget);
-        let newPos;
-        if (res.found) {
-          result.push([...newResArr, sortedCdd[res.pos - 1]]);
-          for (let i = res.pos; i < len; i++) {
-            if (sortedCdd[i] !== newTarget) {
-              newPos = i;
-              break;
+      if (!(i > pos && num === sortedCdd[i - 1])) {
+        const newResArr = [...resArr, num];
+        if (num === target) {
+          result.push(newResArr);
+        } else if (num < target) {
+          const newTarget = target - num;
+          const res = binSearch(i + 1, newTarget);
+          let newPos;
+          if (res.found) {
+            result.push([...newResArr, sortedCdd[res.pos - 1]]);
+            for (let i = res.pos; i < len; i++) {
+              if (sortedCdd[i] !== newTarget) {
+                newPos = i;
+                break;
+              }
             }
+          } else {
+            newPos = res.pos;
           }
-        } else {
-          newPos = res.pos;
-        }
-        if (res.pos !== undefined) {
-          rec(newPos, newTarget, newResArr);
+          if (res.pos !== undefined) {
+            rec(newPos, newTarget, newResArr);
+          }
         }
       }
     }
@@ -62,4 +64,4 @@ var combinationSum2 = function (candidates, target) {
   return result;
 };
 
-console.log(combinationSum2([10, 1, 2, 7, 6, 1, 5], 8));
+console.log(combinationSum2([2, 5, 2, 1, 2], 5));
