@@ -1,16 +1,21 @@
 const fizzBuzz = (n) => {
-  const arr = [];
-  for (let i = 0; i < n; i++) {
-    const num = i + 1;
-    if (num % 15 === 0) {
-      arr.push("FizzBuzz");
-    } else if (num % 3 === 0) {
-      arr.push("Fizz");
-    } else if (num % 5 === 0) {
-      arr.push("Buzz");
-    } else {
-      arr.push(num.toString());
+  const arr = [
+    [3, 5],
+    ["Fizz", "Buzz"],
+  ];
+  const len = arr[0].length;
+  const res = [];
+  for (let i = 1; i <= n; i++) {
+    let str = "";
+    for (let j = 0; j < len; j++) {
+      if (i % arr[0][j] === 0) {
+        str += arr[1][j];
+      }
     }
+    if (str === "") {
+      str += i.toString();
+    }
+    res.push(str);
   }
-  return arr;
+  return res;
 };
