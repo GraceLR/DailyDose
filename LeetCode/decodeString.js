@@ -6,42 +6,28 @@ const rep = (str, num) => {
   return res;
 };
 var decodeString = function (s) {
-  const rec = (pos) => {
-    let num = s[pos];
-    let newI;
-    for (let i = pos + 1; i < s.length; i++) {
-      const l = s[i];
-      if (l === "[") {
-        newI = i + 1;
-        break;
-      }
-      num += l;
-    }
-    num = Number(num);
-    let str = "";
-    for (let i = newI; i < s.length; i++) {
-      const l = s[i];
-      if (l === "]") {
-        return { str: rep(str, num), i };
-      } else if (!isNaN(Number(l))) {
-        const res = rec(i);
-        str += res.str;
-        i = res.i;
-      } else {
-        str += l;
-      }
-    }
-  };
-  let str = "";
-  for (let i = 0; i < s.length; i++) {
+  const len = s.length;
+  const numStack = [];
+  const strStack = [];
+  let curStr = "";
+  let curNum = "";
+  for (let i = 0; i < len; i++) {
     const l = s[i];
+    const stackLen = numStack.length;
     if (!isNaN(Number(l))) {
-      const res = rec(i);
-      str += res.str;
-      i = res.i;
+      curNum += l;
+    } else if (l === "[") {
+      numStack.push(Number(curNum));
+      strStack.push(curStr);
+      curStr = "";
+      curNum = "";
+    } else if (l === "]") {
+      curStr = strStack[stackLen - 1] + rep(curStr, numStack[stackLen - 1]);
+      strStack.pop();
+      numStack.pop();
     } else {
-      str += l;
+      curStr += l;
     }
   }
-  return str;
+  return curStr;
 };
