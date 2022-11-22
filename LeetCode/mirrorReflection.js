@@ -1,5 +1,6 @@
 const mirrorReflection = (p, q) => {
   const posFunc = (pos, border, direction, lORm, tanTop, newTanTop) => {
+    // modify this function
     if (lORm === "more") {
       if (border === "r") {
         if (direction === "u") {
@@ -119,4 +120,5 @@ const mirrorReflection = (p, q) => {
     }
     return rec(newBor, newDir, newPos, newTanTop);
   };
+  return rec("r", "u", [p, q], p);
 };
