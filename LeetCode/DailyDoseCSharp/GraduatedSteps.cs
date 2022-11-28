@@ -11,14 +11,14 @@ namespace DailyDoseCSharp
         public static string GraduatedValue(long value, int decimalPlaces, bool addDecimalForSingleDigit)
         {
             var graduatedSteps = new Dictionary<int, string>()
-        {
-            { 15, "Q" },
-            { 12, "T" },
-            { 9 , "B" },
-            { 6 , "M" },
-            { 3 , "T" },
-            { 0 , ""  }
-        };
+            {
+                { 15, "Q" },
+                { 12, "T" },
+                { 9 , "B" },
+                { 6 , "M" },
+                { 3 , "T" },
+                { 0 , ""  }
+            };
 
             if (decimalPlaces < 0)
             {
@@ -26,7 +26,7 @@ namespace DailyDoseCSharp
             }
 
             decimal graduatedValue = value;
-            int step = 0;
+            int step = 3;
             for (; step <= 15; step += 3)
             {
                 var possibleValue = value / (decimal)Math.Pow(10, step);
