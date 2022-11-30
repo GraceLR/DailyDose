@@ -10,22 +10,32 @@ namespace DailyDoseCSharp
 	{
 		public static int Solution(int n)
 		{
-			if (n == 0)
+			var queue = new Queue<int>();
+			queue.Enqueue(n);
+			
+			var steps = new int[] { 2, 1 };
+			var ways = 0;
+	
+			while (queue.Any())
 			{
-				return 1;
+				int currentN = queue.Dequeue();
+
+				if (currentN == 0)
+				{
+					ways += 1;
+				}
+				else if (currentN > 0)
+				{
+					foreach (var step in steps)
+					{
+						queue.Enqueue(currentN - step);
+					}
+				}
 			}
-			if (n < 0)
-			{
-				return 0;
-			}
-			var steps = new int[] { 1, 2 };
-			int ways = 0;
-			foreach (var step in steps)
-			{
-				ways += Solution(n - step);
-			}
+
 			return ways;
 		}
 	}
 }
+
 
