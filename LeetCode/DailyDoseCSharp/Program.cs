@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-			Console.WriteLine(ClimbStairs.Solution(44));
+            Console.WriteLine(PlusOne.Solution(new int[] { 1,2,3 }));
         }
     }
 }
