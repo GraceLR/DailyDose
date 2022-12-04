@@ -31,9 +31,22 @@ namespace DailyDoseCSharp
 
 		public static int Q2()
 		{
-			var input = testInput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
-
-			return 0;
+			var input = rawInput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+			int count = 0;
+			foreach(var line in input)
+			{
+				var parts = line.Split(',');
+				var parts0 = parts[0].Split('-');
+				var parts1 = parts[1].Split('-');
+				int deduction1 = Convert.ToInt32(parts0[0]) - Convert.ToInt32(parts1[0]);
+				int deduction2 = Convert.ToInt32(parts0[1]) - Convert.ToInt32(parts1[0]);
+				int deduction3 = Convert.ToInt32(parts0[0]) - Convert.ToInt32(parts1[1]);
+				if (deduction1 * deduction2 <= 0 || deduction1 * deduction3 <= 0)
+				{
+					count++;
+				}
+			}
+			return count;
 		}
 
 		static string testInput = @"2-4,6-8
