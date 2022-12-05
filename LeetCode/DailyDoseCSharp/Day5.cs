@@ -56,9 +56,30 @@ namespace DailyDoseCSharp
 		}
 
 
-		public static int Q2()
+		public static string Q2()
 		{
-			return 0;
+			var stringMatrix = rawInputStack.Split(Environment.NewLine);
+			var moves = rawInput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+			var matrix = transpose(stringMatrix);
+			foreach (var move in moves)
+			{
+				var moveArray = move.Split(" ");
+				int from = Convert.ToInt32(moveArray[3]) - 1;
+				int to = Convert.ToInt32(moveArray[5]) - 1;
+				int ct = Convert.ToInt32(moveArray[1]);
+				for (var i = 0; i < ct; i++)
+				{
+					char poped = matrix[from][ct - i - 1];
+					matrix[to].Insert(0, poped);
+					matrix[from].RemoveAt(ct - i - 1);
+				}
+			}
+			string message = "";
+			foreach (var arr in matrix)
+			{
+				message += arr[0];
+			}
+			return message;
 		}
 
 		static string rawInputStack = @"     L HM
