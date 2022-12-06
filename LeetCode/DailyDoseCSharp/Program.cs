@@ -4,8 +4,8 @@
     {
         static void Main(string[] args)
 		{
-			Console.WriteLine(Day5.Q1());
-			Console.WriteLine(Day5.Q2());
+			Console.WriteLine(Day6.Q1());
+			Console.WriteLine(Day6.Q2());
 		}
     }
 }
