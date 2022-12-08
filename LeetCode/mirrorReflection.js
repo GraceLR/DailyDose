@@ -82,3 +82,4 @@ const mirrorReflection = (p, q) => {
   };
   return rec("r", "u", [p, q], p);
 };
+console.log(mirrorReflection(69, 58));
