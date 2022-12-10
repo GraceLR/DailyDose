@@ -32,7 +32,4 @@ const multiply = (num1, num2) => {
     string = ele + string;
   });
   return string;
-  return string;
 };
-
-console.log(multiply("523564086927429363577662123518880", "3975965131624"));
