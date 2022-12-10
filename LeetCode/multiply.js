@@ -15,8 +15,10 @@ const multiply = (num1, num2) => {
       const mod = num % 10;
       carry = Math.floor(num / 10);
       if (res[len1 - i + len2 - j - 2] === undefined) {
-        res[len1 - i + len2 - j - 2] = mod + carryRes;
-        carryRes = 0;
+        const tempNum = mod + carryRes;
+        const pushNum = tempNum % 10;
+        carryRes = Math.floor(tempNum / 10);
+        res[len1 - i + len2 - j - 2] = pushNum;
       } else {
         const numRes = res[len1 - i + len2 - j - 2] + mod + carryRes;
         const modRes = numRes % 10;
@@ -36,4 +38,4 @@ const multiply = (num1, num2) => {
   return string;
 };
 
-console.log(multiply("913", "25"));
+console.log(multiply("523564086927429363577662123518880", "3975965131624"));
