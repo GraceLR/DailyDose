@@ -15,16 +15,12 @@ const multiply = (num1, num2) => {
       const mod = num % 10;
       carry = Math.floor(num / 10);
       if (res[len1 - i + len2 - j - 2] === undefined) {
-        const tempNum = mod + carryRes;
-        const pushNum = tempNum % 10;
-        carryRes = Math.floor(tempNum / 10);
-        res[len1 - i + len2 - j - 2] = pushNum;
-      } else {
-        const numRes = res[len1 - i + len2 - j - 2] + mod + carryRes;
-        const modRes = numRes % 10;
-        carryRes = Math.floor(numRes / 10);
-        res[len1 - i + len2 - j - 2] = modRes;
+        res[len1 - i + len2 - j - 2] = 0;
       }
+      const numRes = res[len1 - i + len2 - j - 2] + mod + carryRes;
+      const modRes = numRes % 10;
+      carryRes = Math.floor(numRes / 10);
+      res[len1 - i + len2 - j - 2] = modRes;
     }
     if (carry || carryRes) {
       res.push(carry + carryRes);
@@ -35,6 +31,7 @@ const multiply = (num1, num2) => {
   res.forEach((ele) => {
     string = ele + string;
   });
+  return string;
   return string;
 };
 
