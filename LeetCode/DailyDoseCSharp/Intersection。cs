@@ -1,0 +1,19 @@
+public class Solution {
+    public int[] Intersection(int[] nums1, int[] nums2) {
+        var nums1HashSet = new HashSet<int>();
+        var intersection = new List<int>();
+        foreach (int num in nums1)
+        {
+            nums1HashSet.Add(num);
+        }
+        foreach (int num in nums2)
+        {
+            if (nums1HashSet.Contains(num))
+            {
+                intersection.Add(num);
+                nums1HashSet.Remove(num);
+            }
+        }
+        return intersection.ToArray();
+    }
+}
