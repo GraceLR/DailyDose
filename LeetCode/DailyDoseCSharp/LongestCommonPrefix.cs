@@ -1,5 +1,7 @@
 public class Solution {
+    public int bb;
     public string LongestCommonPrefix(string[] strs) {
+        var b = nameof(Aname);
         var commenPrefix = "";
         for (int i = 0; i < strs[0].Length; i++)
         {
